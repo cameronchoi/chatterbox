@@ -3,7 +3,6 @@ const app = {
   init: function () {
     app.findRooms()
     setInterval(app.fetch, 200)
-    app.fetch()
   },
   send: message =>
     $.ajax({
