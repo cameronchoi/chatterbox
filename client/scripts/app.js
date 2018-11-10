@@ -1,6 +1,10 @@
 const app = {
   server: 'http://52.78.213.9:3000/messages',
-  init: function () {},
+  init: function () {
+    app.findRooms()
+    setInterval(app.fetch, 200)
+    app.fetch()
+  },
   send: message =>
     $.ajax({
       type: 'POST',
@@ -75,9 +79,7 @@ const app = {
 }
 
 $(document).ready(() => {
-  app.findRooms()
-  setInterval(app.fetch, 200)
-  app.fetch()
+  app.init()
 
   $('#send').on('click', () => {
     if ($('#text').val() !== '') {
