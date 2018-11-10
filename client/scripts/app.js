@@ -1,10 +1,10 @@
-const url = 'http://52.78.213.9:3000/messages'
 const app = {
+  server: 'http://52.78.213.9:3000/messages',
   init: function () {},
   send: message =>
     $.ajax({
       type: 'POST',
-      url,
+      url: app.server,
       contentType: 'application/JSON',
       data: JSON.stringify(message),
       success: function (data) {
@@ -17,7 +17,7 @@ const app = {
   fetch: () =>
     $.ajax({
       type: 'GET',
-      url,
+      url: app.server,
       success: data => {
         $('#chats').html('')
         data.forEach(message => {
@@ -58,7 +58,7 @@ const app = {
   findRooms: () => {
     $.ajax({
       type: 'GET',
-      url,
+      url: app.server,
       success: data => {
         let rooms = {}
         data.forEach(message => {

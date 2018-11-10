@@ -13,16 +13,20 @@ body {
     padding: 50px 60px;
     border: solid #ddd;
     border-width: 1px 1px 1px 1px;
+    border-radius: 5px;
 }
 
 #currentRoom {
+    position: relative;
+    top: 0.5px;
     width: 600px;
     margin: auto;
     text-align: left;
     background: white;
     padding: 50px 60px;
     border: solid #ddd;
-    border-width: 0px 1px 1px 1px;
+    border-width: 1px 1px 1px 1px;
+    border-radius: 5px;
 }
 
 #main h1 {
