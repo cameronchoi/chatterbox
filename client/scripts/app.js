@@ -104,6 +104,7 @@ $(document).ready(() => {
 
   $('#usernameButton').on('click', () => {
     if ($('#username').val() !== '') {
+      $('#main').removeClass('mainCenter')
       $('#usernameBox').hide()
       $('#textBox').fadeIn(500)
       $('#enter-button').fadeIn(500)
@@ -132,12 +133,14 @@ $(document).ready(() => {
 
   $('#backArrow').on('click', () => {
     if ($('#usernameBox').css('display') === 'none') {
-      $('#currentRoom').slideUp(500)
+      $('#main').addClass('mainCenter')
+      $('#currentRoom').hide()
       $('#textBox').hide()
       $('#enter-button').hide()
       $('#usernameBox').fadeIn(500)
       $('#text').val('')
     } else if ($('#createRoom').css('display') === 'none') {
+      $('#main').addClass('mainCenter')
       $('#username').val('')
       $('#usernameBox').hide()
       $('#backArrow').hide()
@@ -158,6 +161,7 @@ $(document).ready(() => {
         app.renderRoom()
         $('#roomInput').val('')
       } else if ($('#username').val() !== '') {
+        $('#main').removeClass('mainCenter')
         $('#usernameBox').hide()
         $('#textBox').fadeIn(500)
         $('#enter-button').fadeIn(500)
