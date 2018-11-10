@@ -5,8 +5,8 @@ body {
     font-family: arial, sans-serif;
 }
 
-#main, #chats {
-    width: 500px;
+#main, #currentRoom {
+    width: 600px;
     margin: auto;
     text-align: left;
     background: white;
@@ -20,10 +20,6 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
-}
-
-#main h1 span {
-    font-style:italic;
 }
 
 #main ul {
@@ -88,3 +84,73 @@ form input[type=text] {
     background-color: #0090da;
 }
 
+.usernameText {
+    font-weight: bold
+}
+
+#chatterbox {
+    text-align: center;
+    font-family: 'Black And White Picture', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#backArrow {
+    display: none;
+    position: relative;
+    top: -44px;
+    cursor: pointer;
+}
+
+#enter-button {
+    display: none;
+}
+
+#usernameBox {
+    display: none
+}
+
+#textBox {
+    display: none
+}
+
+#parent {
+    display: flex;
+}
+
+input {
+    flex: 1;
+}
+
+#selectRoom {
+    position: relative;
+    top: 10px
+}
+
+#createRoom {
+    position: relative;
+    top: 5px
+}
+
+#usernameBox, #chatBox {
+    position: relative;
+    top: -10px
+}
+
+#roomName {
+    text-align: center;
+    position: relative;
+    top: -20px
+}
+
+#currentRoom {
+    display: none
+}
+
+#text {
+    height: 50px
+}
+
+.coolBounce {
+    font-style: normal;
+    cursor: pointer
+}

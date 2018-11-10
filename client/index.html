@@ -4,16 +4,66 @@
     <meta charset="utf-8">
     <title>chatterbox</title>
     <link rel="stylesheet" href="styles/styles.css">
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+   crossorigin="anonymous">
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+   crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Roboto+Condensed" rel="stylesheet">
     <!-- dependencies -->
     <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
     <div id="main">
-      <h1>chatterbox</h1>
+      <div>
+        <div id="chatterboxBox">
+          <h1 id="chatterbox"><span class="coolBounce">chatterbox  </span><i class="far fa-comment-dots coolBounce"></i></i></h1>
+        </div>
+      </div>
+      <i class="fas fa-arrow-left" id="backArrow"></i>
+      <div id="createRoom">
+        <h4 id="">Create a Room</h4>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="roomInput" placeholder="It can be anything you want!" aria-label="Rooms's name" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+              <button class="btn btn-outline-dark" id="roomButton" type="button">Enter</button>
+          </div>
+        </div>
+      </div>
+      <div id="selectRoom">
+        <h4 id="room">Select a Room</h4>
+        <select class="form-control" id="roomSelect" placeholder="Select a Room!">
+          <option value=""></option>
+        </select>
+      </div>
+      <div id="usernameBox">
+        <h4>Username</h4>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="username" placeholder="Write Your Name!" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-dark" id="usernameButton" type="button">Enter</button>
+          </div>
+        </div>
+      </div>
+      <div id="chatBox">
+          <div class="form-group" id="textBox">
+            <h4>Chat</h4>
+            <input type="text" class="form-control" id="text" placeholder="Speak Your Mind!">
+            <!-- <textarea class="form-control" id="text" rows="3" placeholder="Speak Your Mind!"></textarea> -->
+          </div>
+          <div id="enter-button">
+            <button type="button" id="send" class="btn btn-outline-dark btn-lg btn-block">Enter</button>
+          </div>
+      </div>
       <!-- Your HTML goes here! -->
     </div>
-    <div id="chats"></div>
+    <div id="currentRoom">
+      <div id="roomName">
+        <h5 id="lobbyName"></h5>
+      </div>
+      <div id="chats"></div>
+    </div>
     <!-- your scripts -->
     <script src="scripts/app.js"></script>
   </body>
