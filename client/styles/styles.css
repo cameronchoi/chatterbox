@@ -18,7 +18,7 @@ body {
 
 #currentRoom {
     position: relative;
-    top: 0.5px;
+    top: 1.5px;
     width: 600px;
     margin: auto;
     text-align: left;

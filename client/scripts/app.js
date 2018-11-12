@@ -2,7 +2,7 @@ const app = {
   server: 'http://52.78.213.9:3000/messages',
   init: function () {
     app.findRooms()
-    setInterval(app.fetch, 200)
+    setInterval(app.fetch, 1000)
   },
   send: message =>
     $.ajax({
@@ -94,7 +94,7 @@ $(document).ready(() => {
   })
 
   $('#roomSelect').change(() => {
-    if ($('#roomSelect').val() !== '') {
+    if ($('#roomSelect').val() !== 'Choose...') {
       $('#room').hide()
       $('#roomSelect').hide()
       $('#createRoom').hide()
@@ -120,6 +120,7 @@ $(document).ready(() => {
   $('#roomButton').on('click', () => {
     if ($('#roomInput').val() !== '') {
       app.renderRoom()
+      $('select').val($('#roomInput').val())
       $('#roomInput').val('')
     }
   })
@@ -141,7 +142,7 @@ $(document).ready(() => {
       $('#usernameBox').fadeIn(500)
       $('#text').val('')
     } else if ($('#createRoom').css('display') === 'none') {
-      $('#main').addClass('mainCenter')
+      $('select').val('Choose...')
       $('#username').val('')
       $('#usernameBox').hide()
       $('#backArrow').hide()
@@ -160,6 +161,7 @@ $(document).ready(() => {
     if (key === 13) {
       if ($('#roomInput').val() !== '') {
         app.renderRoom()
+        // $('select').val($('#roomInput').val())
         $('#roomInput').val('')
       } else if ($('#username').val() !== '') {
         $('#main').removeClass('mainCenter')
