@@ -1,40 +1,40 @@
 const app = {
-  server: 'http://52.78.213.9:3000/messages',
+  server: "http://127.0.0.1:3000/classes/messages",
   init: function () {
-    app.findRooms()
-    setInterval(app.fetch, 1000)
+    app.findRooms();
+    // setInterval(app.fetch, 1000)
   },
-  send: message =>
+  send: (message) =>
     $.ajax({
-      type: 'POST',
+      type: "POST",
       url: app.server,
-      contentType: 'application/JSON',
+      contentType: "application/JSON",
       data: JSON.stringify(message),
       success: function (data) {
-        console.log('Chatterbox: Message Sent!')
+        console.log("Chatterbox: Message Sent!");
       },
       error: function (data) {
-        console.error('Chatterbox: Failed To Send Message')
-      }
+        console.error("Chatterbox: Failed To Send Message");
+      },
     }),
   fetch: () =>
     $.ajax({
-      type: 'GET',
+      type: "GET",
       url: app.server,
-      success: data => {
-        $('#chats').html('')
-        data.forEach(message => {
-          if (message.roomname === $('#roomSelect').val()) {
-            app.renderMessage(message)
+      success: (data) => {
+        $("#chats").html("");
+        data.forEach((message) => {
+          if (message.roomname === $("#roomSelect").val()) {
+            app.renderMessage(message);
           }
-        })
-      }
+        });
+      },
     }),
   clearMessages: () => {
-    $('#chats').html('')
+    $("#chats").html("");
   },
-  renderMessage: message => {
-    $('#chats').prepend(
+  renderMessage: (message) => {
+    $("#chats").prepend(
       `<div class="yourText, chat">
             <div class="usernameText">
             ${message.username}
@@ -43,169 +43,172 @@ const app = {
             ${message.text}
             </p>
         </div>`
-    )
+    );
   },
   renderRoom: () => {
-    $('#roomSelect').append(
-      `<option value="${$('#roomInput').val()}" class="selectOptions">${$('#roomInput').val()}</option>`
-    )
+    $("#roomSelect").append(
+      `<option value="${$("#roomInput").val()}" class="selectOptions">${$(
+        "#roomInput"
+      ).val()}</option>`
+    );
   },
-  handleSubmit: e => {
+  handleSubmit: (e) => {
     var message = {
-      username: $('#username').val(),
-      text: $('#text').val(),
-      roomname: $('#roomSelect').val()
-    }
-    app.send(message)
+      username: $("#username").val(),
+      text: $("#text").val(),
+      roomname: $("#roomSelect").val(),
+    };
+    app.send(message);
   },
   findRooms: () => {
     $.ajax({
-      type: 'GET',
+      type: "GET",
       url: app.server,
-      success: data => {
-        let rooms = {}
-        data.forEach(message => {
+      success: (data) => {
+        let rooms = {};
+        data.forEach((message) => {
           if (rooms[message.roomname] === undefined) {
-            rooms[message.roomname] = 1
+            rooms[message.roomname] = 1;
           }
-        })
+        });
         for (var key in rooms) {
-          $('#roomSelect').append(`<option value="${key}">${key}</option>`)
+          $("#roomSelect").append(`<option value="${key}">${key}</option>`);
         }
-      }
-    })
-  }
-}
+      },
+    });
+  },
+};
 
 $(document).ready(() => {
-  app.init()
+  app.init();
 
-  $('#send').on('click', () => {
-    if ($('#text').val() !== '') {
-      app.handleSubmit()
+  $("#send").on("click", () => {
+    if ($("#text").val() !== "") {
+      app.handleSubmit();
       var message = {
-        username: $('#username').val(),
-        text: $('#text').val(),
-        roomname: $('#roomSelect').val()
-      }
-      app.renderMessage(message)
-      $('#text').val('')
+        username: $("#username").val(),
+        text: $("#text").val(),
+        roomname: $("#roomSelect").val(),
+      };
+      app.renderMessage(message);
+      $("#text").val("");
     }
-  })
+  });
 
-  $('#roomSelect').change(() => {
-    if ($('#roomSelect').val() !== 'Choose...') {
-      $('#room').hide()
-      $('#roomSelect').hide()
-      $('#createRoom').hide()
-      $('#backArrow').show()
-      $('#usernameBox').fadeIn(500)
+  $("#enterRoomButton").on("click", () => {
+    if ($("#roomSelect").val() !== "Choose...") {
+      $("#room").hide();
+      $("#roomSelect").hide();
+      $("#enterRoom").hide();
+      $("#createRoom").hide();
+      $("#backArrow").show();
+      $("#usernameBox").fadeIn(500);
     }
-  })
+  });
 
-  $('#usernameButton').on('click', () => {
-    if ($('#username').val() !== '') {
-      $('#main').removeClass('mainCenter')
-      $('#usernameBox').hide()
-      $('#textBox').fadeIn(500)
-      $('#enter-button').fadeIn(500)
-      $('#lobbyName').replaceWith(
-        `<h5 id="lobbyName">${$('#roomSelect').val()}</h5>`
-      )
-      app.fetch()
-      $('#currentRoom').slideDown(500)
+  $("#usernameButton").on("click", () => {
+    if ($("#username").val() !== "") {
+      $("#main").removeClass("mainCenter");
+      $("#usernameBox").hide();
+      $("#textBox").fadeIn(500);
+      $("#enter-button").fadeIn(500);
+      $("#lobbyName").replaceWith(
+        `<h5 id="lobbyName">${$("#roomSelect").val()}</h5>`
+      );
+      app.fetch();
+      $("#currentRoom").slideDown(500);
     }
-  })
+  });
 
-  $('#roomButton').on('click', () => {
-    if ($('#roomInput').val() !== '') {
-      app.renderRoom()
-      $('select').val($('#roomInput').val())
-      $('#roomInput').val('')
+  $("#roomButton").on("click", () => {
+    if ($("#roomInput").val() !== "") {
+      app.renderRoom();
+      $("select").val($("#roomInput").val());
+      $("#roomInput").val("");
     }
-  })
+  });
 
-  $('#backArrow').hover(() => {
-    $('#backArrow').css('color', 'blue')
-  })
+  $("#backArrow").hover(() => {
+    $("#backArrow").css("color", "blue");
+  });
 
-  $('#backArrow').mouseleave(() => {
-    $('#backArrow').css('color', 'black')
-  })
+  $("#backArrow").mouseleave(() => {
+    $("#backArrow").css("color", "black");
+  });
 
-  $('#backArrow').on('click', () => {
-    if ($('#usernameBox').css('display') === 'none') {
-      $('#main').addClass('mainCenter')
-      $('#currentRoom').hide()
-      $('#textBox').hide()
-      $('#enter-button').hide()
-      $('#usernameBox').fadeIn(500)
-      $('#text').val('')
-    } else if ($('#createRoom').css('display') === 'none') {
-      $('select').val('Choose...')
-      $('#username').val('')
-      $('#usernameBox').hide()
-      $('#backArrow').hide()
-      $('#room').fadeIn(500)
-      $('#roomSelect').fadeIn(500)
-      $('#createRoom').fadeIn(500)
+  $("#backArrow").on("click", () => {
+    if ($("#usernameBox").css("display") === "none") {
+      $("#main").addClass("mainCenter");
+      $("#currentRoom").hide();
+      $("#textBox").hide();
+      $("#enter-button").hide();
+      $("#usernameBox").fadeIn(500);
+      $("#text").val("");
+    } else if ($("#createRoom").css("display") === "none") {
+      $("select").val("Choose...");
+      $("#username").val("");
+      $("#usernameBox").hide();
+      $("#backArrow").hide();
+      $("#room").fadeIn(500);
+      $("#roomSelect").fadeIn(500);
+      $("#createRoom").fadeIn(500);
     }
-  })
+  });
 
-  $('.coolBounce').click(function () {
-    $('#chatterbox').effect('bounce', 'slow')
-  })
+  $(".coolBounce").click(function () {
+    $("#chatterbox").effect("bounce", "slow");
+  });
 
-  $('input').keypress(e => {
-    var key = e.which
+  $("input").keypress((e) => {
+    var key = e.which;
     if (key === 13) {
-      if ($('#roomInput').val() !== '') {
-        app.renderRoom()
+      if ($("#roomInput").val() !== "") {
+        app.renderRoom();
         // $('select').val($('#roomInput').val())
-        $('#roomInput').val('')
-      } else if ($('#username').val() !== '') {
-        $('#main').removeClass('mainCenter')
-        $('#usernameBox').hide()
-        $('#textBox').fadeIn(500)
-        $('#enter-button').fadeIn(500)
-        $('#lobbyName').replaceWith(
-          `<h5 id="lobbyName">${$('#roomSelect').val()}</h5>`
-        )
-        app.fetch()
-        $('#currentRoom').slideDown(500)
+        $("#roomInput").val("");
+      } else if ($("#username").val() !== "") {
+        $("#main").removeClass("mainCenter");
+        $("#usernameBox").hide();
+        $("#textBox").fadeIn(500);
+        $("#enter-button").fadeIn(500);
+        $("#lobbyName").replaceWith(
+          `<h5 id="lobbyName">${$("#roomSelect").val()}</h5>`
+        );
+        app.fetch();
+        $("#currentRoom").slideDown(500);
       }
     }
-  })
+  });
 
-  $('#text').keypress(e => {
-    var keycode = event.keyCode ? event.keyCode : event.which
-    if (keycode == '13') {
-      if ($('#text').val() !== '') {
-        app.handleSubmit()
+  $("#text").keypress((e) => {
+    var keycode = event.keyCode ? event.keyCode : event.which;
+    if (keycode == "13") {
+      if ($("#text").val() !== "") {
+        app.handleSubmit();
         var message = {
-          username: $('#username').val(),
-          text: $('#text').val(),
-          roomname: $('#roomSelect').val()
-        }
-        app.renderMessage(message)
-        $('#text').val('')
+          username: $("#username").val(),
+          text: $("#text").val(),
+          roomname: $("#roomSelect").val(),
+        };
+        app.renderMessage(message);
+        $("#text").val("");
       }
     }
-  })
+  });
 
-  $('textarea').keypress(e => {
-    var key = e.which
+  $("textarea").keypress((e) => {
+    var key = e.which;
     if (key === 13) {
-      if ($('#text').val() !== '') {
-        app.handleSubmit()
+      if ($("#text").val() !== "") {
+        app.handleSubmit();
         var message = {
-          username: $('#username').val(),
-          text: $('#text').val(),
-          roomname: $('#roomSelect').val()
-        }
-        app.renderMessage(message)
-        $('#text').val('')
+          username: $("#username").val(),
+          text: $("#text").val(),
+          roomname: $("#roomSelect").val(),
+        };
+        app.renderMessage(message);
+        $("#text").val("");
       }
     }
-  })
-})
+  });
+});
