@@ -151,6 +151,7 @@ $(document).ready(() => {
       $("#backArrow").hide();
       $("#room").fadeIn(500);
       $("#roomSelect").fadeIn(500);
+      $("#enterRoom").fadeIn(500);
       $("#createRoom").fadeIn(500);
     }
   });
